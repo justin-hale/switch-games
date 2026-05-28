@@ -1,0 +1,22 @@
+[
+  {
+    "id": "justin",
+    "name": "Justin",
+    "avatar": "/switch-games/avatars/justin.png"
+  },
+  {
+    "id": "christina",
+    "name": "Christina",
+    "avatar": "/switch-games/avatars/christina.png"
+  },
+  {
+    "id": "oliver",
+    "name": "Oliver",
+    "avatar": "/switch-games/avatars/oliver.png"
+  },
+  {
+    "id": "thea",
+    "name": "Thea",
+    "avatar": "/switch-games/avatars/thea.png"
+  }
+]
