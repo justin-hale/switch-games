@@ -41,7 +41,11 @@ export function useGames(githubToken, gistId) {
     )
   }
 
-  const sorted = [...games].sort((a, b) => a.title.localeCompare(b.title))
+  function sortKey(title) {
+    return title.replace(/^the\s+/i, '')
+  }
+
+  const sorted = [...games].sort((a, b) => sortKey(a.title).localeCompare(sortKey(b.title)))
 
   return { games: sorted, loading, error, reload: load, addGame, removeGame, setHolder }
 }
