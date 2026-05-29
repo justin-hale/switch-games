@@ -53,14 +53,9 @@ export default function GameCard({ game, onSetHolder, onRemove }) {
         )}
       </div>
 
-      {/* Title bar */}
-      <div className="px-2 py-1.5 bg-zinc-900/80">
-        <p className="text-xs text-zinc-300 truncate" title={game.title}>{game.title}</p>
-      </div>
-
       {/* Holder avatar — bottom right of cover */}
       <button
-        className="absolute bottom-8 right-1.5 rounded-full ring-2 ring-zinc-900 hover:ring-blue-500 transition-all cursor-pointer"
+        className="absolute bottom-1.5 right-1.5 rounded-full ring-2 ring-zinc-900 hover:ring-blue-500 transition-all cursor-pointer"
         onClick={() => setShowMenu(v => !v)}
         title={holder ? `Held by ${holder.name}` : 'Assign holder'}
       >

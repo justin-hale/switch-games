@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { searchGames, fetchCovers } from '../lib/steamgriddb'
 
-export default function AddGameModal({ steamToken, onAdd, onClose }) {
+export default function AddGameModal({ workerUrl, onAdd, onClose }) {
   const [query, setQuery] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const [selectedGame, setSelectedGame] = useState(null)
@@ -17,14 +17,14 @@ export default function AddGameModal({ steamToken, onAdd, onClose }) {
   async function handleSearch(e) {
     e.preventDefault()
     if (!query.trim()) return
-    if (!steamToken) {
-      setError('No SteamGridDB API key set. Use manual URL entry below, or add your key in Settings.')
+    if (!workerUrl) {
+      setError('No Worker URL set. Add your Cloudflare Worker URL in Settings, or use manual URL entry below.')
       return
     }
     setSearching(true)
     setError(null)
     try {
-      const results = await searchGames(steamToken, query)
+      const results = await searchGames(workerUrl, query)
       setSearchResults(results)
     } catch (e) {
       setError(e.message)
@@ -39,7 +39,7 @@ export default function AddGameModal({ steamToken, onAdd, onClose }) {
     setError(null)
     setStep('covers')
     try {
-      const c = await fetchCovers(steamToken, game.id)
+      const c = await fetchCovers(workerUrl, game.id)
       setCovers(c)
     } catch (e) {
       setError(e.message)

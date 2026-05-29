@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { createGist } from '../lib/gist'
 
 export default function SettingsModal({ settings, onClose }) {
-  const { githubToken, setGithubToken, gistId, setGistId, steamToken, setSteamToken } = settings
+  const { githubToken, setGithubToken, gistId, setGistId, workerUrl, setWorkerUrl } = settings
   const [localGithub, setLocalGithub] = useState(githubToken)
   const [localGist, setLocalGist] = useState(gistId)
-  const [localSteam, setLocalSteam] = useState(steamToken)
+  const [localWorker, setLocalWorker] = useState(workerUrl)
   const [creating, setCreating] = useState(false)
   const [createError, setCreateError] = useState(null)
 
@@ -26,7 +26,7 @@ export default function SettingsModal({ settings, onClose }) {
   function handleSave() {
     setGithubToken(localGithub)
     setGistId(localGist)
-    setSteamToken(localSteam)
+    setWorkerUrl(localWorker)
     onClose()
   }
 
@@ -48,7 +48,7 @@ export default function SettingsModal({ settings, onClose }) {
             <div>
               <label className="block text-xs text-zinc-500 mb-1">
                 Personal Access Token
-                <span className="ml-1 text-zinc-600">(needs <code className="bg-zinc-800 px-1 rounded">gist</code> scope)</span>
+                <span className="ml-1 text-zinc-600">(classic token with <code className="bg-zinc-800 px-1 rounded">gist</code> scope)</span>
               </label>
               <input
                 type="password"
@@ -80,19 +80,19 @@ export default function SettingsModal({ settings, onClose }) {
             </div>
           </section>
 
-          {/* SteamGridDB */}
+          {/* Cloudflare Worker */}
           <section className="space-y-2">
-            <h3 className="text-sm font-medium text-zinc-300">SteamGridDB</h3>
+            <h3 className="text-sm font-medium text-zinc-300">Cover Art Search</h3>
             <div>
               <label className="block text-xs text-zinc-500 mb-1">
-                API Key
-                <span className="ml-1 text-zinc-600">(optional — needed for cover search)</span>
+                Cloudflare Worker URL
+                <span className="ml-1 text-zinc-600">(optional — needed for SteamGridDB search)</span>
               </label>
               <input
-                type="password"
-                value={localSteam}
-                onChange={e => setLocalSteam(e.target.value)}
-                placeholder="Your SteamGridDB API key"
+                type="url"
+                value={localWorker}
+                onChange={e => setLocalWorker(e.target.value)}
+                placeholder="https://your-worker.workers.dev"
                 className="w-full bg-zinc-800 border border-zinc-600 rounded-lg px-3 py-2 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-blue-500"
               />
             </div>

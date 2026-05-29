@@ -89,7 +89,7 @@ export default function App() {
 
         {/* Game Grid */}
         {games.length > 0 && (
-          <div className="grid gap-3" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))' }}>
+          <div className="grid gap-3 grid-cols-3 sm:grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">
             {games.map(game => (
               <GameCard
                 key={game.id}
@@ -105,7 +105,7 @@ export default function App() {
       {/* Modals */}
       {showAdd && (
         <AddGameModal
-          steamToken={settings.steamToken}
+          workerUrl={settings.workerUrl}
           onAdd={addGame}
           onClose={() => setShowAdd(false)}
         />
